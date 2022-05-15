@@ -27,6 +27,7 @@ ul {
 }
 
 .square {
+	color: wheat;
 	background: #666;
 	border: 1px solid #BBB;
 	float: left;
