@@ -27,7 +27,7 @@ class Board extends React.Component {
 		squares[i] = this.state.currentPlayer;
 		this.setState({
 			squares,
-			currentPlayer: this.state.currentPlayer == "X" ? "O" : "X",
+			currentPlayer: this.state.currentPlayer === "X" ? "O" : "X",
 		});
 	}
 
@@ -42,7 +42,6 @@ class Board extends React.Component {
 
 	render() {
 		const winner = calculateWinner(this.state.squares);
-		console.log(winner);
 		const status = winner ? `${winner} won!` : `Current player: ${this.state.currentPlayer}`;
 
 		return (
@@ -100,9 +99,11 @@ const calculateWinner = squares => {
 		[0, 4, 8],
 		[2, 4, 6],
 	];
+	let win;
 	lines.forEach(line => {
 		//Checks if there is line of three same symbols. Return is the winner "X" or "O", else it returns null
-		return (squares[line[0]] != null && squares[line[0]] == squares[line[1]] && squares[line[0]] == squares[line[2]]) ? squares[line[0]] : null;
+		if (squares[line[0]] != null && squares[line[0]] === squares[line[1]] && squares[line[0]] === squares[line[2]]) win = squares[line[0]];
 	});
+	return win;
 }
 
