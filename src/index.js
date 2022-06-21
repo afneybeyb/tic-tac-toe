@@ -19,16 +19,20 @@ class Board extends React.Component {
 		this.state = {
 			squares: Array(9).fill(null),
 			currentPlayer: "X",
+			win: null,
 		};
 	}
 
 	handleClick(i) {
-		const squares = [...this.state.squares];
-		squares[i] = this.state.currentPlayer;
-		this.setState({
-			squares,
-			currentPlayer: this.state.currentPlayer === "X" ? "O" : "X",
-		});
+		if (!this.state.win) {
+			const squares = [...this.state.squares];
+			squares[i] = this.state.currentPlayer;
+			this.setState({
+				squares,
+				currentPlayer: this.state.currentPlayer === "X" ? "O" : "X",
+				win: calculateWinner(squares),
+			});
+		}
 	}
 
 	renderSquare(i) {
@@ -41,8 +45,7 @@ class Board extends React.Component {
 	}
 
 	render() {
-		const winner = calculateWinner(this.state.squares);
-		const status = winner ? `${winner} won!` : `Current player: ${this.state.currentPlayer}`;
+		const status = this.state.win ? `${this.state.win} won!` : `Current player: ${this.state.currentPlayer}`;
 
 		return (
 			<div>
