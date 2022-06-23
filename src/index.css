@@ -6,6 +6,7 @@ body,
 }
 
 body {
+	background-color: #685c4f;
 	font: 14px "Century Gothic", Futura, sans-serif;
 	margin: 20px;
 }
@@ -56,6 +57,7 @@ ul {
 	justify-content: center;
 	align-items: center;
 	border-radius: 2rem;
+	background: #b7a99a;
 }
 
 .game-board {
