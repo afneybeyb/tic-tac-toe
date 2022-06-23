@@ -20,18 +20,24 @@ class Board extends React.Component {
 			squares: Array(9).fill(null),
 			currentPlayer: "X",
 			win: null,
+			filled: false,
 		};
 	}
 
 	handleClick(i) {
 		if (!this.state.win) {
 			const squares = [...this.state.squares];
-			squares[i] = this.state.currentPlayer;
-			this.setState({
-				squares,
-				currentPlayer: this.state.currentPlayer === "X" ? "O" : "X",
-				win: calculateWinner(squares),
-			});
+			const filled = boardFilled(squares);
+
+			if (!squares[i] || filled) {
+				squares[i] = this.state.currentPlayer;
+				this.setState({
+					squares,
+					currentPlayer: this.state.currentPlayer === "X" ? "O" : "X",
+					win: calculateWinner(squares),
+					filled: boardFilled(squares),
+				});
+			}
 		}
 	}
 
@@ -45,7 +51,7 @@ class Board extends React.Component {
 	}
 
 	render() {
-		const status = this.state.win ? `${this.state.win} won!` : `Current player: ${this.state.currentPlayer}`;
+		const status = this.state.win ? `${this.state.win} won!` : `${this.state.filled ? `Now it becomes interesting. You can overwrite your opponent's moves. ` : ``}Current player: ${this.state.currentPlayer}`;
 
 		return (
 			<div>
@@ -104,9 +110,16 @@ const calculateWinner = squares => {
 	];
 	let win;
 	lines.forEach(line => {
-		//Checks if there is line of three same symbols. Return is the winner "X" or "O", else it returns null
+		// Checks if there is line of three same symbols. Return is the winner "X" or "O", else it returns null.
 		if (squares[line[0]] != null && squares[line[0]] === squares[line[1]] && squares[line[0]] === squares[line[2]]) win = squares[line[0]];
 	});
 	return win;
 }
+
+// Checks all 9 fields in the board. If all of them are filled, function returns the initial true value. If it finds one empty field, it returns false.
+const boardFilled = (squares => {
+	let filled = true;
+	squares.forEach(square => {if (!square) filled = false});
+	return filled;
+});
 
