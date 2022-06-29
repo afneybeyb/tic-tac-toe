@@ -2,7 +2,7 @@ html,
 body,
 #root,
 .game {
-	height: calc(100% - 20px);
+	height: calc(100% - 10px);
 }
 
 body {
@@ -11,20 +11,19 @@ body {
 	margin: 20px;
 }
 
-ol,
-ul {
-	padding-left: 30px;
+.board {
+	text-align: center;
 }
 
-.board-row:after {
-	clear: both;
-	content: "";
+.board-row {
 	display: table;
+	margin-inline: auto;
 }
 
 .status {
-	font-size: 1.1rem;
 	margin-bottom: 20px;
+	font-size: 1.1rem;
+	text-align: center;
 }
 
 .square {
@@ -51,16 +50,22 @@ ul {
 	background: #FFF;
 }
 
+.filled-message {
+	margin-bottom: 0.5rem;
+}
+
 .game {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 	border-radius: 2rem;
-	background: #b7a99a;
+	background-color: #b7a99a;
 }
 
 .game-board {
+	display: flex;
+	justify-content: center;
 	background-color: bisque;
 	padding: 30px;
 	border: 1px solid transparent;
