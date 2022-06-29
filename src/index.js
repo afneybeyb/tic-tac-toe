@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+// Simple component, that represents each field on board. It is clickable and it shows either "X", "O", or nothing.
 const Square = props => {
 	return (
 		<button
@@ -25,10 +26,12 @@ class Board extends React.Component {
 	}
 
 	handleClick(i) {
+		// Continues only if the game is not won yet
 		if (!this.state.win) {
 			const squares = [...this.state.squares];
 			const filled = boardFilled(squares);
 
+			// If the selected field is empty or the game board is full, write the value into the field
 			if (!squares[i] || filled) {
 				squares[i] = this.state.currentPlayer;
 				this.setState({
@@ -96,6 +99,7 @@ class Game extends React.Component {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Game />);
 
+// Checks if there is line of three same symbols. Return value is the winner "X" or "O", else it returns null.
 const calculateWinner = squares => {
 	const lines = [
 		[0, 1, 2],
@@ -108,8 +112,8 @@ const calculateWinner = squares => {
 		[2, 4, 6],
 	];
 	let win;
+
 	lines.forEach(line => {
-		// Checks if there is line of three same symbols. Return is the winner "X" or "O", else it returns null.
 		if (squares[line[0]] != null && squares[line[0]] === squares[line[1]] && squares[line[0]] === squares[line[2]]) win = squares[line[0]];
 	});
 	return win;
