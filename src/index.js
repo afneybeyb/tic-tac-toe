@@ -51,10 +51,13 @@ class Board extends React.Component {
 	}
 
 	render() {
-		const status = this.state.win ? `${this.state.win} won!` : `${this.state.filled ? `Now it becomes interesting. You can overwrite your opponent's moves. ` : ``}Current player: ${this.state.currentPlayer}`;
+		const status = this.state.win ? `${this.state.win} won!` : `Current player: ${this.state.currentPlayer}`;
 
 		return (
-			<div>
+			<div className="board">
+				{
+					!this.state.win ? this.state.filled ? <div className="filled-message">Now it becomes interesting.You can overwrite your opponent's moves.</div> : null : null
+				}
 				<div className="status">{status}</div>
 				<div className="board-row">
 					{this.renderSquare(0)}
@@ -82,10 +85,6 @@ class Game extends React.Component {
 			<div className="game">
 				<div className="game-board">
 					<Board />
-				</div>
-				<div className="game-info">
-					<div>{/* status */}</div>
-					<ol>{/* TODO */}</ol>
 				</div>
 			</div>
 		);
