@@ -15,53 +15,18 @@ const Square = props => {
 }
 
 class Board extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			squares: Array(9).fill(null),
-			currentPlayer: "X",
-			win: null,
-			filled: false,
-		};
-	}
-
-	handleClick(i) {
-		// Continues only if the game is not won yet
-		if (!this.state.win) {
-			const squares = [...this.state.squares];
-			const filled = boardFilled(squares);
-
-			// If the selected field is empty or the game board is full, write the value into the field
-			if (!squares[i] || filled) {
-				squares[i] = this.state.currentPlayer;
-				this.setState({
-					squares,
-					currentPlayer: this.state.currentPlayer === "X" ? "O" : "X",
-					win: calculateWinner(squares),
-					filled: boardFilled(squares),
-				});
-			}
-		}
-	}
-
 	renderSquare(i) {
 		return (
 			<Square
-				value={this.state.squares[i]}
-				onClick={() => this.handleClick(i)}
+				value={this.props.squares[i]}
+				onClick={() => this.props.onClick(i)}
 			/>
 		);
 	}
 
 	render() {
-		const status = this.state.win ? `${this.state.win} won!` : `Current player: ${this.state.currentPlayer}`;
-
 		return (
 			<div className="board">
-				{
-					!this.state.win ? this.state.filled ? <div className="filled-message">Now it becomes interesting.You can overwrite your opponent's moves.</div> : null : null
-				}
-				<div className="status">{status}</div>
 				<div className="board-row">
 					{this.renderSquare(0)}
 					{this.renderSquare(1)}
@@ -83,11 +48,60 @@ class Board extends React.Component {
 }
 
 class Game extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			history: [{
+				squares: Array(9).fill(null),
+			}],
+			currentPlayer: "X",
+			win: null,
+			filled: false,
+		};
+	}
+
+	handleClick(i) {
+		// Continues only if the game is not won yet
+		if (!this.state.win) {
+			const history = this.state.history;
+			// Takes the last board squares status from history
+			const squares = [...history[history.length - 1].squares];
+			const filled = boardFilled(squares);
+
+			// If the selected field is empty or the game board is full, write the value into the field
+			if (!squares[i] || filled) {
+				squares[i] = this.state.currentPlayer;
+				// Adds new squares to the history and changes the state values 
+				this.setState({
+					history: history.concat([{
+						squares: squares,
+					}]),
+					currentPlayer: this.state.currentPlayer === "X" ? "O" : "X",
+					win: calculateWinner(squares),
+					filled: boardFilled(squares),
+				});
+			}
+		}
+	}
+
 	render() {
+		// Saves current game board state to const
+		let current = this.state.history[this.state.history.length - 1];
+		const status = this.state.win ? `${this.state.win} won!` : `Current player: ${this.state.currentPlayer}`;
+
 		return (
 			<div className="game">
 				<div className="game-board">
-					<Board />
+					<Board
+						squares={current.squares}
+						onClick={(i) => this.handleClick(i)}
+					/>
+				</div>
+				<div className="game-info">
+					{
+						!this.state.win ? this.state.filled ? <div className="filled-message">Now it becomes interesting.You can overwrite your opponent's moves.</div> : null : null
+					}
+					{status}
 				</div>
 			</div>
 		);
