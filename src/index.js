@@ -98,10 +98,11 @@ class Game extends React.Component {
 					/>
 				</div>
 				<div className="game-info">
+					<div className="game-status">{status}</div>
 					{
 						!this.state.win ? this.state.filled ? <div className="filled-message">Now it becomes interesting.You can overwrite your opponent's moves.</div> : null : null
 					}
-					{status}
+					
 				</div>
 			</div>
 		);
