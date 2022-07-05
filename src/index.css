@@ -1,14 +1,19 @@
+* {
+	box-sizing: border-box;
+}
+
 html,
 body,
 #root,
 .game {
-	height: calc(100% - 10px);
+	height: 100%;
 }
 
 body {
 	background-color: #685c4f;
 	font: 14px "Century Gothic", Futura, sans-serif;
-	margin: 20px;
+	margin: 0;
+	padding: 20px;
 }
 
 .board {
@@ -17,11 +22,9 @@ body {
 
 .board-row {
 	display: table;
-	margin-inline: auto;
 }
 
 .status {
-	margin-bottom: 20px;
 	font-size: 1.1rem;
 	text-align: center;
 }
@@ -35,28 +38,14 @@ body {
 	font-weight: bold;
 	line-height: 50px;
 	height: 50px;
-	margin-right: -1px;
-	margin-top: -1px;
 	padding: 0;
 	text-align: center;
 	width: 50px;
 }
 
-.square:focus {
-	outline: none;
-}
-
-.kbd-navigation .square:focus {
-	background: #FFF;
-}
-
-.filled-message {
-	margin-bottom: 0.5rem;
-}
-
 .game {
 	display: flex;
-	padding: 2rem;
+	padding: 20px;
 	flex-direction: column;
 	align-items: center;
 	gap: 2rem;
@@ -68,7 +57,7 @@ body {
 	display: flex;
 	justify-content: center;
 	background-color: bisque;
-	padding: 30px;
+	padding: 20px;
 	border: 1px solid transparent;
 	border-radius: 2rem;
 }
@@ -78,5 +67,29 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	row-gap: 1rem;
-	margin-inline: 20px;
+	color: white;
+}
+
+.game-status {
+	font-size: 1.2rem;
+}
+
+@media (max-width: 350px) {
+	body {
+		padding: 5px;
+	}
+	
+	.game {
+		padding-inline: 0.25rem;
+		border-radius: 0;
+	}
+
+	.game-board {
+		padding: 5px;
+		border-radius: 0.5rem;
+	}
+
+	.game-status {
+		font-size: 1rem;
+	}
 }
