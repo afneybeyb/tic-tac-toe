@@ -54,16 +54,26 @@ class Game extends React.Component {
 			history: [{
 				squares: Array(9).fill(null),
 			}],
+			currentStep: 0,
 			currentPlayer: "X",
 			win: null,
 			filled: false,
 		};
 	}
 
+	jumpTo(stepNum) {
+		this.setState({
+			currentStep: stepNum,
+			currentPlayer: (stepNum % 2 === 0) ? "X" : "O",
+			win: null,
+			filled: false,
+		});
+	}
+
 	handleClick(i) {
 		// Continues only if the game is not won yet
 		if (!this.state.win) {
-			const history = this.state.history;
+			const history = this.state.history.slice(0, this.state.currentStep + 1);
 			// Takes the last board squares status from history
 			const squares = [...history[history.length - 1].squares];
 			const filled = boardFilled(squares);
@@ -76,6 +86,7 @@ class Game extends React.Component {
 					history: history.concat([{
 						squares: squares,
 					}]),
+					currentStep: history.length,
 					currentPlayer: this.state.currentPlayer === "X" ? "O" : "X",
 					win: calculateWinner(squares),
 					filled: boardFilled(squares),
@@ -87,12 +98,12 @@ class Game extends React.Component {
 	render() {
 		// Saves current game board state to const
 		const history = this.state.history;
-		const current = history[history.length - 1];
+		const current = history[this.state.currentStep];
 
 		const moves = history.map((squares, i) => {
 			const buttonText = i ? `Go to move #${i}` : `Go to game START`;
 			return ((i !== history.length - 1) ? (
-				<button onClick={() => this.jumpTo(i)}>{buttonText}</button>
+				<button key={i} onClick={() => this.jumpTo(i)}>{buttonText}</button>
 			) : null);
 		});
 
