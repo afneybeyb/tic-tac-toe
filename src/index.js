@@ -86,7 +86,16 @@ class Game extends React.Component {
 
 	render() {
 		// Saves current game board state to const
-		let current = this.state.history[this.state.history.length - 1];
+		const history = this.state.history;
+		const current = history[history.length - 1];
+
+		const moves = history.map((squares, i) => {
+			const buttonText = i ? `Go to move #${i}` : `Go to game START`;
+			return ((i !== history.length - 1) ? (
+				<button onClick={() => this.jumpTo(i)}>{buttonText}</button>
+			) : null);
+		});
+
 		const status = this.state.win ? `${this.state.win} won!` : `Current player: ${this.state.currentPlayer}`;
 
 		return (
@@ -102,7 +111,7 @@ class Game extends React.Component {
 					{
 						!this.state.win ? this.state.filled ? <div className="filled-message">Now it becomes interesting.You can overwrite your opponent's moves.</div> : null : null
 					}
-					
+					<div className="moves">{moves}</div>
 				</div>
 			</div>
 		);
