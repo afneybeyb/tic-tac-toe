@@ -93,6 +93,7 @@ body {
 }
 
 .moves > button {
+	min-width: 130px;
 	margin: 2px;
 	padding: 5px;
 	color: white;
