@@ -50,15 +50,7 @@ class Board extends React.Component {
 class Game extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			history: [{
-				squares: Array(9).fill(null),
-			}],
-			currentStep: 0,
-			currentPlayer: "X",
-			win: null,
-			filled: false,
-		};
+		this.state = {...defaultGameState()};
 	}
 
 	jumpTo(stepNum) {
@@ -68,6 +60,11 @@ class Game extends React.Component {
 			win: null,
 			filled: false,
 		});
+	}
+
+	// Sets all state variables to default
+	reset() {
+		this.setState({...defaultGameState()});
 	}
 
 	handleClick(i) {
@@ -103,7 +100,7 @@ class Game extends React.Component {
 		const moves = history.map((squares, i) => {
 			const buttonText = i ? `Go to move #${i}` : `Go to game START`;
 			return ((history.length !== 1) ? (
-				<button key={i} onClick={() => this.jumpTo(i)}>{buttonText}</button>
+				<button className="move" key={i} onClick={() => this.jumpTo(i)}>{buttonText}</button>
 			) : null);
 		});
 
@@ -122,7 +119,12 @@ class Game extends React.Component {
 					{
 						!this.state.win ? this.state.filled ? <div className="filled-message">Now it becomes interesting.You can overwrite your opponent's moves.</div> : null : null
 					}
-					<div className="moves">{moves}</div>
+					<div className="moves">
+						{
+							this.state.win ? <button className="move reset-button" onClick={() => this.reset()}>RESET game</button> : null
+						}
+						{moves}
+					</div>
 				</div>
 			</div>
 		);
@@ -161,3 +163,15 @@ const boardFilled = (squares => {
 	return filled;
 });
 
+// Returns default state of Game component
+const defaultGameState = (() => {
+	return {
+		history: [{
+			squares: Array(9).fill(null),
+		}],
+		currentStep: 0,
+		currentPlayer: "X",
+		win: null,
+		filled: false,
+	};
+});
