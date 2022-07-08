@@ -50,7 +50,7 @@ class Board extends React.Component {
 class Game extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {...defaultGameState()};
+		this.state = { ...defaultGameState() };
 	}
 
 	jumpTo(stepNum) {
@@ -64,7 +64,7 @@ class Game extends React.Component {
 
 	// Sets all state variables to default
 	reset() {
-		this.setState({...defaultGameState()});
+		this.setState({ ...defaultGameState() });
 	}
 
 	handleClick(i) {
@@ -159,7 +159,7 @@ const calculateWinner = squares => {
 // Checks all 9 fields in the board. If all of them are filled, function returns the initial true value. If it finds one empty field, it returns false.
 const boardFilled = (squares => {
 	let filled = true;
-	squares.forEach(square => {if (!square) filled = false});
+	squares.forEach(square => { if (!square) filled = false });
 	return filled;
 });
 
