@@ -32,21 +32,30 @@ body {
 .square {
 	width: 50px;
 	height: 50px;
-	padding: 2px;
 	color: bisque;
 	background: #666;
-	border: 1px solid #BBB;
+	border: 2px solid #666;
 	float: left;
 
 	line-height: 32px;
 	font-size: 32px;
 	font-weight: bold;
 	text-align: center;
+
+	clip-path: polygon(calc(0% + 2px) calc(0% + 2px),
+			/* top left */
+			calc(100% - 2px) calc(0% + 2px),
+			/* top right */
+			calc(100% - 2px) calc(100% - 2px),
+			/* bottom right */
+			calc(0% + 2px) calc(100% - 2px)
+			/* bottom left */
+		);
+	transition: clip-path 0.1s linear;
 }
 
 .square:hover {
-	padding: 0px;
-	border-width: 3px;
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .game {
@@ -84,6 +93,7 @@ body {
 .filled-message {
 	text-align: center;
 	margin-inline: auto;
+	font-size: 1.05rem;
 }
 
 .moves {
@@ -98,12 +108,23 @@ body {
 	padding: 5px;
 	color: white;
 	background-color: #685c4f;
-	border: 2px solid bisque;
+	border: 5px solid bisque;
+
+	clip-path: polygon(calc(0% + 3px) calc(0% + 3px),
+			/* top left */
+			calc(100% - 3px) calc(0% + 3px),
+			/* top right */
+			calc(100% - 3px) calc(100% - 3px),
+			/* bottom right */
+			calc(0% + 3px) calc(100% - 3px)
+			/* bottom left */
+		);
+	transition: clip-path 0.1s linear;
+
 }
 
 .move:hover {
-	border-width: 4px;
-	padding: 3px;
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .reset-button {
