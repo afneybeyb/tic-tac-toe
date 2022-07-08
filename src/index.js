@@ -117,7 +117,7 @@ class Game extends React.Component {
 				<div className="game-info">
 					<div className="game-status">{status}</div>
 					{
-						!this.state.win ? this.state.filled ? <div className="filled-message">Now it becomes interesting.You can overwrite your opponent's moves.</div> : null : null
+						!this.state.win ? this.state.filled ? <div className="filled-message">Now it becomes interesting.You can <strong>overwrite</strong> your opponent's moves.</div> : null : null
 					}
 					<div className="moves">
 						{
