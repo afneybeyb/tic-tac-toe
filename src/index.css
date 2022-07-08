@@ -92,7 +92,7 @@ body {
 	flex-direction: column;
 }
 
-.moves > button {
+.move {
 	min-width: 130px;
 	margin: 2px;
 	padding: 5px;
@@ -101,9 +101,18 @@ body {
 	border: 2px solid bisque;
 }
 
-.moves > button:hover {
+.move:hover {
 	border-width: 4px;
 	padding: 3px;
+}
+
+.reset-button {
+	margin-bottom: 0.75rem;
+	background-color: bisque;
+	color: #685c4f;
+	font-size: 1.2rem;
+	font-weight: bold;
+	border-color: #685c4f;
 }
 
 @media (max-width: 350px) {
