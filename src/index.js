@@ -123,7 +123,7 @@ class Game extends React.Component {
 						{
 							this.state.win ? <button className="move reset-button" onClick={() => this.reset()}>RESET game</button> : null
 						}
-						{moves}
+						{moves.reverse()}
 					</div>
 				</div>
 			</div>
