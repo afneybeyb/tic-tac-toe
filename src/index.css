@@ -78,11 +78,12 @@ body {
 }
 
 .game-info {
+	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	row-gap: 0.75rem;
 	color: white;
+	overflow: auto;
 }
 
 .game-status {
@@ -99,7 +100,9 @@ body {
 .moves {
 	display: flex;
 	margin-inline: auto;
+	padding-inline: 0.5rem;
 	flex-direction: column;
+	overflow: scroll;
 }
 
 .move {
