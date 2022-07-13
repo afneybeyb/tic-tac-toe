@@ -57,8 +57,8 @@ class Game extends React.Component {
 		this.setState({
 			currentStep: stepNum,
 			currentPlayer: (stepNum % 2 === 0) ? "X" : "O",
-			win: null,
-			filled: false,
+			win: calculateWinner(this.state.history[stepNum].squares),
+			filled: boardFilled(this.state.history[stepNum].squares),
 		});
 	}
 
