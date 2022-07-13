@@ -100,9 +100,19 @@ body {
 .moves {
 	display: flex;
 	margin-inline: auto;
-	padding-inline: 0.5rem;
+	padding: 0.5rem;
 	flex-direction: column;
+
 	overflow: scroll;
+
+	border: 2px solid rgba(104, 92, 79, 0.4);
+	border-radius: 0.5rem;
+
+	transition: border 0.2s linear;
+}
+
+.moves:hover {
+	border: 2px solid rgba(104, 92, 79, 1);
 }
 
 .move {
