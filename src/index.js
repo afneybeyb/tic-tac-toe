@@ -119,12 +119,15 @@ class Game extends React.Component {
 					{
 						!this.state.win ? this.state.filled ? <div className="filled-message">Now it becomes interesting.You can <strong>overwrite</strong> your opponent's moves.</div> : null : null
 					}
-					<div className="moves">
-						{
-							this.state.win ? <button className="move reset-button" onClick={() => this.reset()}>RESET game</button> : null
-						}
-						{moves.reverse()}
-					</div>
+					{this.state.history.length > 1 ? (
+						<div className="moves">
+							{
+								this.state.win ? <button className="move reset-button" onClick={() => this.reset()}>RESET game</button> : null
+							}
+							{moves.reverse()}
+						</div>
+					)
+						: null}
 				</div>
 			</div>
 		);
